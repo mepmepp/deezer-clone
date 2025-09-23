@@ -1,0 +1,58 @@
+/*  =================
+    CUSTOM PROPERTIES
+    ================= */
+
+:root {
+
+    /* PALETTE */
+    --color-red: hsl(0, 100%, 50%);
+    --color-light-gray: hsl(254, 23%, 50%);
+    --color-dark-gray: hsl(254, 23%, 26%);
+    --color-white: hsl(0, 0%, 100%);
+
+    /* LIGHT DARK COLORS */
+    --color-highlighted-background: light-dark(var(--color-white), var(--color-dark-gray));
+    --color-background: light-dark(var(--color-white), var(--color-light-gray));
+    --color-font: light-dark(var(--color-dark-gray), var(--color-white));
+
+    /* */
+
+}
+
+[data-theme="dark"] {
+    color-scheme: dark;
+}
+
+[data-theme="light"] {
+    color-scheme: light;
+}
+
+[data-theme="fun"] {
+
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-background);
+}
+
+#header {
+    z-index: 2;
+}
+
+.header-top-container {
+    background-color: var(--color-highlighted-background);
+    color: ;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+.inner-header-top-container {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+}
