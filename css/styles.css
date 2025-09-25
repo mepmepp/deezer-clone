@@ -353,7 +353,7 @@ a:hover {
 
 .movie-poster-container:hover .movie-poster {
     filter: blur(1px);
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .movie-poster-container:hover .info-box {
