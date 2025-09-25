@@ -8,8 +8,8 @@
     --color-red: hsl(0, 100%, 50%);
 
     --color-light-gray: hsl(254, 23%, 97%);
-    --color-gray: hsl(254, 23%, 26%);
-    --color-dark-gray: hsl(254, 23%, 16%);
+    --color-gray: hsl(254, 23%, 20%);
+    --color-dark-gray: hsl(254, 23%, 10%);
     --color-gray-with-opacity: hsla(254, 23%, 26%, 0.5);
     --color-white: hsl(0, 0%, 100%);
     --color-white-with-opacity: hsla(0, 0%, 100%, 0.5);
