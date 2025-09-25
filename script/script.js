@@ -146,15 +146,35 @@ function addMoviesToRow(movies, containerSelector) {
 //   if (prevButton) container.appendChild(prevButton);
 //   if (nextButton) container.appendChild(nextButton);
   movies.forEach(movie => {
+    // Create container for poster and info box
+    const posterContainer = document.createElement("div");
+    posterContainer.classList.add("movie-poster-container");
+
+    // Create and setup movie poster image
     const img = document.createElement("img");
     img.src = `${IMAGE_BASE_URL}${movie.poster_path}`;
     img.alt = movie.title;
     img.setAttribute("aria-label", `Poster of ${movie.title}`);
     img.classList.add("movie-poster");
-    container.appendChild(img);
-
-    createInfoBox();
-
+    
+    // Create info box
+    const infoBox = document.createElement("div");
+    infoBox.classList.add("info-box");
+    
+    // Add title and overview to info box
+    const title = document.createElement("h3");
+    title.textContent = movie.title;
+    
+    const overview = document.createElement("p");
+    overview.textContent = movie.overview;
+    
+    // Add elements to their containers
+    infoBox.appendChild(title);
+    infoBox.appendChild(overview);
+    
+    posterContainer.appendChild(img);
+    posterContainer.appendChild(infoBox);
+    container.appendChild(posterContainer);
   });
 }
 
