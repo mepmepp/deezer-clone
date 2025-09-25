@@ -269,6 +269,13 @@ a:hover {
     overflow-x: auto;
     overflow-y: hidden;
     padding: var(--gap-m);
+    -ms-overflow-style: none; 
+    scrollbar-width: none;    
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.movies::-webkit-scrollbar {
+    display: none;
 }
 
 .movie-poster-container {
