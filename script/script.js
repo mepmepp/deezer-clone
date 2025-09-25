@@ -240,12 +240,55 @@ function addMoviesToRow(movies, containerSelector) {
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  // Favorites section
-  fetchMovies("/movie/top_rated?sort_by=vote_average.desc", ".my-favorites .movies"); 
+// Fetch and update genre categories
+async function fetchAndUpdateGenres() {
+    try {
+        const response = await fetch(`${BASE_URL}/genre/movie/list?language=en`, options);
+        const data = await response.json();
+        
+        // Get all section titles
+        const sectionTitles = document.querySelectorAll('section h2');
+        
+        // Update each section title if a matching genre is found
+        sectionTitles.forEach(title => {
+            // Get the section's class name
+            const sectionClass = title.closest('section').classList[0];
+            
+            // Find matching genre
+            const genre = data.genres.find(g => 
+                g.name.toLowerCase().includes(sectionClass.replace(/-/g, ' ').toLowerCase()) ||
+                sectionClass.replace(/-/g, ' ').toLowerCase().includes(g.name.toLowerCase())
+            );
+            
+            if (genre) {
+                title.textContent = genre.name;
+            }
+        });
+    } catch (error) {
+        console.error("Error fetching genres:", error);
+    }
+}
 
-  // Hero banner
-//   fetchHeroMovie("/movie/top_rated?sort_by=vote_average.desc"); // line added
+// Genre IDs from TMDB
+const GENRE_IDS = {
+    action: 28,
+    comedy: 35,
+    drama: 18,
+    'science-fiction': 878,
+    horror: 27
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Fetch genres and update category titles
+    fetchAndUpdateGenres();
+    
+    // Fetch movies for each genre
+    Object.entries(GENRE_IDS).forEach(([genre, id]) => {
+        fetchMovies(`/discover/movie?with_genres=${id}`, `.${genre} .movies`);
+    });
+
+    // Hero banner
+    //   fetchHeroMovie("/movie/top_rated?sort_by=vote_average.desc"); // line added
 });
 
 // USER EVENTS WHEN CLICKING ON LOGO
