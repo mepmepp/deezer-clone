@@ -268,7 +268,7 @@ a:hover {
     position: relative;
     overflow-x: auto;
     overflow-y: hidden;
-    padding: var(--gap-m);
+    padding: var(--gap-m) 0;
     -ms-overflow-style: none; 
     scrollbar-width: none;    
 }
