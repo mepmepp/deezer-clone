@@ -103,10 +103,10 @@ const options = {
 // FETCH DES FILMS
 
 var Movie = /** @class */ (function () {
-    function Movie(id, title, description) {
+    function Movie(id, title, overview) {
         this.id = id;
         this.title = title;
-        this.description = description;
+        this.overview = overview;
     }
     return Movie;
 }());
@@ -117,6 +117,19 @@ async function fetchMovies(endpoint, containerSelector) {
     try {
         const response = await fetch(`${BASE_URL}${endpoint}&language=fr-FR`, options);
         const data = await response.json();
+        
+        // Store movies in allMovies array
+        data.results.forEach(movie => {
+            const newMovie = new Movie(
+                movie.id,
+                movie.title,
+                movie.overview
+            );
+            if (!allMovies.some(m => m.id === movie.id)) {
+                allMovies.push(newMovie);
+            }
+        });
+        
         addMoviesToRow(data.results, containerSelector);
     } catch (error) {
         console.error("Erreur API :", error);
@@ -130,8 +143,8 @@ function addMoviesToRow(movies, containerSelector) {
 //   const nextButton = container.querySelector('.scroll-button.next');
   container.innerHTML = "";
   
-  if (prevButton) container.appendChild(prevButton);
-  if (nextButton) container.appendChild(nextButton);
+//   if (prevButton) container.appendChild(prevButton);
+//   if (nextButton) container.appendChild(nextButton);
   movies.forEach(movie => {
     const img = document.createElement("img");
     img.src = `${IMAGE_BASE_URL}${movie.poster_path}`;
