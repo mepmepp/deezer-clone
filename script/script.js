@@ -22,7 +22,34 @@ const createSearchBar = () => {
         // Show the search bar with animation
         setTimeout(() => searchInput.classList.add("visible"), 0);
     } else {
-        return;
+
+        const loopIcone = document.getElementById("loop-icone");
+        const home = document.getElementById("home");
+        const mylist = document.getElementById("my-list");
+        if (!loopIcone) return; 
+
+        if (home) {
+            home.style.transition = "opacity var(--transition-time-fast) ease-in-out";
+            home.style.opacity = "0";
+            let transitionTime = document.documentElement.getPropertyValue("--transition-time-fast");
+            setTimeout(() => {
+                home.style.display = "none";
+            }, transitionTime);
+
+        }
+        if (mylist) {
+            mylist.style.transition = "opacity var(--transition-time-fast) ease-in-out";
+            mylist.style.opacity = "0";
+            setTimeout(() => {
+                mylist.style.display = "none";
+            }, transitionTime);
+        }; 
+
+
+        const searchInput = document.createElement("input");
+        searchInput.type = "text";
+        searchInput.placeholder = "Search...";
+        searchInput.classList.add("search-input-mobile");  
     }
     
     searchBarCreated = true;
@@ -37,7 +64,11 @@ const colorThemeManagement = () => {
     var root = document.documentElement;
 
     // Add mouseenter event for search bar
-    loopIcone?.addEventListener("mouseenter", createSearchBar);
+    if (window.innerWidth >= 600) {
+        loopIcone?.addEventListener("mouseenter", createSearchBar);
+    } else {
+        loopIcone?.removeEventListener("click", createSearchBar);
+    }
     root.setAttribute("data-theme", "dark");
 
     var isHovering = false;
