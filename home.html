@@ -3,31 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deezer Clone</title>
+    <title>ChillFlix</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Frijole&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik+Glitch&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
-
+    <script src="script/script.js" defer></script>
 </head>
 <body>
-    <header id="header">
-        <section class="header-top-container">
-            <section class="inner-header-top-container">
-                <img src="https://placehold.co/40x40/000000/FFFFFF.png" alt=""></div>
-                <a class="home">Home</a>
-                <a class="my-list" href="">My List</a>
-            </section>
-            <section class="inner-header-top-container">
-                <img class="icone" src="https://placehold.co/40x40/000000/FFFFFF.png" alt="download icone">
-                <img class="icone" src="https://placehold.co/40x40/000000/FFFFFF.png" alt="search icone">
-            </section>
-        </section>
-        <section class="header-bottom">
-            <div role="button"><p>Series</p></div>
-            <div role="button"><p>Films</p></div>
-            <div role="button"><p>Categories</p><img class="icone" src="resources/icones/down-arrow.png" alt="down arrow"></div>
-        </section>
-    </header>
+    <header id="header-container"></header>
     <aside></aside>
-    <main></main>
-    <footer></footer>
+    <main>
+        <section class="hero-banner">
+            <div class="hero-content">
+                <h1>Welcome to <span class="logo-like">ChillFlix</span></h1>
+                <p id="chillflix-resume"">Unlimited streaming of films and shows. Step inside — what lurks in the shadows may chill, thrill, or delight your mind. You won’t know until it’s too late.</p>
+
+                <button role="button" href="#" id="hero-watch-button" class="button">▶ Watch now if you dare</button>
+                <button role="button" href="#" id="hero-info-button" class="button">ℹ Truth is dangerous</button>
+
+            </div>
+        </section>
+        <section class="my-favorites">
+            <h2>Favorites</h2>
+            <div class="movies-wrapper">
+                <div class="movies" role="list">
+                    <button class="scroll-button previous" aria-label="Previous"></button>
+                    <button class="scroll-button next"></button>
+                    <img src="" alt="" class="movie-poster" role="listitem">
+                    <img src="" alt="" class="movie-poster" role="listitem">
+                    <img src="" alt="" class="movie-poster" role="listitem">
+                    <img src="" alt="" class="movie-poster" role="listitem">
+                    <img src="" alt="" class="movie-poster" role="listitem">
+                    <img src="" alt="" class="movie-poster" role="listitem">
+                    <img src="" alt="" class="movie-poster" role="listitem">
+                    <img src="" alt="" class="movie-poster" role="listitem">
+                </div>
+            </div>
+        </section>
+        <section class="trending">
+            <h2>Trends</h2>
+            <div class="movie-grid">
+
+            </div>
+        </section>
+        <section></section>
+        <section></section>
+    </main>
 </body>
 </html>

@@ -1,21 +1,44 @@
-/*  =================
-    CUSTOM PROPERTIES
-    ================= */
+/*  ================= */
+/*  CUSTOM PROPERTIES */
+/*  ================= */
 
 :root {
 
-    /* PALETTE */
+    /* GENERAL PALETTE */
     --color-red: hsl(0, 100%, 50%);
-    --color-light-gray: hsl(254, 23%, 50%);
-    --color-dark-gray: hsl(254, 23%, 26%);
-    --color-white: hsl(0, 0%, 100%);
+
+    --color-light-gray: hsl(254, 23%, 97%);
+    --color-gray: hsl(254, 23%, 26%);
+    --color-dark-gray: hsl(254, 23%, 16%);
+    /* --color-white: hsl(0, 0%, 100%); */
+
+    --color-red-chocolate: hsl(350, 75%, 19%);
+    --color-misty-rose: hsl(2, 65%, 91%);
+
+    
+
+    --color-dark-green:	hsl(52, 40%, 23%);
+    --color-moss-green: hsl(64, 29%, 32%);
+    --color-sage: hsl(56, 22%, 74%);
+    --color-ash-gray: hsl(73, 20%, 77%);
+    --color-sky: hsl(158, 29%, 80%);
 
     /* LIGHT DARK COLORS */
-    --color-highlighted-background: light-dark(var(--color-white), var(--color-dark-gray));
-    --color-background: light-dark(var(--color-white), var(--color-light-gray));
-    --color-font: light-dark(var(--color-dark-gray), var(--color-white));
+    --color-highlighted-background: light-dark(var(--color-misty-rose), var(--color-dark-gray));
+    --color-background: light-dark(var(--color-white), var(--color-gray));
+    --color-font: light-dark(var(--color-red-chocolate), var(--color-light-gray));
 
-    /* */
+    /* SPACINGS AND HEIGHTS */
+    --gap-xl: 2rem;
+    --gap-l: 1.5rem;
+    --gap-m: 1rem;
+    --header-height: 2.5rem;
+
+    --button-padding-l: 0.5rem 1rem;
+    --button-padding-m: 1px 0.8rem;
+    --body-padding: 10px; /* This variable is to avoid having elements to close to the exern borders */
+
+    --margin-m: 0.8rem 0.8rem;
 
 }
 
@@ -28,31 +51,251 @@
 }
 
 [data-theme="fun"] {
-
+    --color-highlighted-background: ;
+    --color-background: ;
+    --color-font: ;
 }
+
+/* ============== */
+/* GENERAL STYLES */
+/* ============== */
 
 body {
     margin: 0;
     padding: 0;
     background-color: var(--color-background);
+    font-family: "Roboto", sans-serif;
+    font-size: large;
 }
 
+a {
+    all: unset;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+/* ==== */
+/* LOGO */
+/* ==== */
+
+.logo {
+    font-family: "Rubik Glitch", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+
+
+  /* font-family: "Fredericka the Great", serif;
+  font-weight: 400;
+  font-style: normal; */
+
+
+}
+
+.logo-like {
+    font-family: "Rubik Glitch", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* ====== */
+/* ICONES */
+/* ====== */
+
+.icone {
+    height: 20px;
+}
+
+.icone:hover {
+    cursor: pointer;
+}
+
+#color-theme-icone {
+    transform: scale(1.05);
+}
+
+/* ====== */
+/* HEADER */
+/* ====== */
+
+
 #header {
-    z-index: 2;
+    background-color: var(--color-highlighted-background);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    mask-image: linear-gradient(to bottom, black 25%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 25%, transparent 100%);
+}
+
+#header-container {
+    height: calc(var(--header-height) * 2);
+}
+
+.header-top-container, .header-bottom-container {
+    color: var(--color-font);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: var(--header-height);
 }
 
 .header-top-container {
-    background-color: var(--color-highlighted-background);
-    color: ;
-    display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    flex-wrap: nowrap;
 }
 
-.inner-header-top-container {
+.inner-header-top-container, .button, .inner-header-bottom-container {
     display: flex;
     align-items: center;
-    text-align: center;
-    gap: 1rem;
 }
+
+.inner-header-top-container, .inner-header-bottom-container {
+    gap: var(--gap-m);
+}
+
+.header-bottom-container {
+    justify-content: start;
+    gap: var(--gap-m);
+
+    position: relative;
+
+    /* opacity: 0; */
+    /* transform: translateY(calc(-1 * var(--header-height))); */
+    z-index: 4;
+    
+
+}
+
+/* .header-top-container:hover ~ .header-bottom-container,
+.header-bottom-container:hover {
+    opacity: 1;
+    transform: translateY(0);
+} */
+
+.header-placeholder { 
+    height: calc(var(--header-height) * 3);
+
+
+}
+
+/* ======= */
+/* BUTTONS */
+/* ======= */
+
+.button {
+    border: solid var(--color-font) 1px;
+    border-radius: 20px;
+
+    padding: var(--button-padding-m);
+
+    font-family: "Roboto", sans-serif;
+    font-size: large;
+    font-weight: 400;
+    color: var(--color-font);
+
+    background-color: transparent;
+
+    transition: 
+        color 200ms ease-in-out,
+        background-color 200ms ease-in-out;
+}
+
+.button:hover {
+    cursor: pointer;
+    color: var(--color-dark-gray);
+    background-color: var(--color-font);
+}
+
+/* =========== */
+/* HERO BANNER */
+/* =========== */
+
+.hero-banner {
+    background-size: cover; 
+}
+
+.hero-buttons,
+.hero-content {
+    display: grid;
+    place-items: center;
+    text-align: center;
+}
+
+#hero-watch-button,
+#hero-info-button {
+    margin: var(--margin-m);
+    padding: var(--button-padding-l);
+}
+
+.hero-banner,
+.hero-banner::after {
+  /* Mask that fades the sides */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+}
+
+
+
+/* ===================== */
+/* GENERAL FILM SECTIONS */
+/* ===================== */
+
+
+
+
+/* ============= */
+/* FILM SECTIONS */
+/* ============= */
+
+.movie-wrapper {
+    display: flex;
+    position: relative;
+}
+
+.movies {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    position: absolute;
+}
+
+.movie-poster {
+    height: 20rem;
+    transition: 
+        filter 200ms ease-in-out,
+        transform 200ms ease-in-out;
+}
+
+.movie-poster:hover {
+    cursor: pointer;
+    filter: blur(2px);
+    transform: scale(1.05);
+    z-index: 6;
+}
+
+.scroll-button {
+    height: 7vw;
+    width: 7vw;
+    border-radius: 100px;
+    position: absolute;
+    z-index: 7;
+}
+
+.scroll-button:hover {
+    cursor: pointer;
+
+}
+
+.previous {
+    left: 10px;
+    transform: translateY(-50%);
+}
+
+.next {
+    right: 10px;
+}
+
