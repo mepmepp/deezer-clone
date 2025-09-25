@@ -272,6 +272,7 @@ a:hover {
     gap: var(--gap-s);
     width: 100%;
     position: relative;
+    overflow-y: hidden;
 }
 
 .movie-poster {
