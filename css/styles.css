@@ -52,6 +52,11 @@
 
     --margin-m: 0.8rem 0.8rem;
 
+    /* transition times */ 
+    --transition-time-medium: 400ms;
+    --transition-time-fast: 200ms;
+    --transition-time-slow: 600ms;
+
 }
 
 [data-theme="dark"] {
@@ -127,6 +132,26 @@ a:hover {
 #color-theme-icone {
     transform: scale(1.05);
 }
+
+.search-input {
+    background: transparent;
+    border: 1px solid var(--color-font);
+    color: var(--color-font);
+    padding: 4px 8px;
+    border-radius: var(--border-radius-l);
+    font-size: 14px;
+    width: 0;
+    opacity: 0;
+    transition: 
+        width var(--transition-time-medium) ease-in-out, 
+        opacity var(--transition-time-medium) ease-in-out;
+}
+
+.search-input.visible {
+    width: 40vw;
+    opacity: 1;
+}
+
 
 /* ====== */
 /* HEADER */
@@ -212,8 +237,8 @@ a:hover {
     background-color: transparent;
 
     transition: 
-        color 200ms ease-in-out,
-        background-color 200ms ease-in-out;
+        color var(--transition-time-fast) ease-in-out,
+        background-color var(--transition-time-fast) ease-in-out;
 }
 
 .button:hover {
@@ -290,8 +315,8 @@ a:hover {
     width: 100%;
     border-radius: var(--border-radius-s);
     transition: 
-        filter 200ms ease-in-out,
-        transform 200ms ease-in-out;
+        filter var(--transition-time-fast) ease-in-out,
+        transform var(--transition-time-fast) ease-in-out;
 }
 
 .info-box {

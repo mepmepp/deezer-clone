@@ -1,5 +1,28 @@
 var root = document.documentElement;
 
+// SEARCH BAR MANAGEMENT
+let searchBarCreated = false;
+
+const createSearchBar = () => {
+    if (searchBarCreated) return;
+
+    const loopIcone = document.getElementById("loop-icone");
+    if (!loopIcone) return;
+
+    const searchInput = document.createElement("input");
+    searchInput.type = "text";
+    searchInput.placeholder = "Search...";
+    searchInput.classList.add("search-input");
+
+    // Insert before the loop icon
+    loopIcone.parentNode.insertBefore(searchInput, loopIcone);
+    
+    // Show the search bar with animation
+    setTimeout(() => searchInput.classList.add("visible"), 0);
+    
+    searchBarCreated = true;
+};
+
 // COLOR THEME
 
 const colorThemeManagement = () => {
@@ -7,6 +30,9 @@ const colorThemeManagement = () => {
     const loopIcone = document.getElementById("loop-icone");
     const arrowDown = document.getElementById("arrow-down-icone");
     var root = document.documentElement;
+
+    // Add mouseenter event for search bar
+    loopIcone?.addEventListener("mouseenter", createSearchBar);
     root.setAttribute("data-theme", "dark");
 
     var isHovering = false;
@@ -255,21 +281,28 @@ function logoListener() {
 
 // CREATE INFO BOX WHEN LOADING MOVIES
 
-const createInfoBox = () => {
-    const infoBox = document.createElement("div");
-    infoBox.class = "info-box";
-    infoBox.id = parseMovieTitle();
-    infoBox.textContent = "Movie Title"; // Placeholder text
-    // infoBox.style.display = "none"; 
-    infoBox.style.position = "absolute";
-    infoBox.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
-    infoBox.style.color = "white";
-    infoBox.style.padding = "10px";
-    infoBox.style.borderRadius = "5px";
-    infoBox.style.zIndex = "1000";
-    document.body.appendChild(infoBox);
-}
+// const createInfoBox = () => {
+//     const infoBox = document.createElement("div");
+//     infoBox.class = "info-box";
+//     infoBox.id = parseMovieTitle();
+//     infoBox.textContent = "Movie Title"; // Placeholder text
+//     // infoBox.style.display = "none"; 
+//     infoBox.style.position = "absolute";
+//     infoBox.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+//     infoBox.style.color = "white";
+//     infoBox.style.padding = "10px";
+//     infoBox.style.borderRadius = "5px";
+//     infoBox.style.zIndex = "1000";
+//     document.body.appendChild(infoBox);
+// }
 
-const parseMovieTitle = () => {
+// const parseMovieTitle = () => {
 
-}
+// }
+
+// SEARCH BAR 
+
+// const loopIcone = document.getElementById("loop-icone");
+// loopIcone.addEventListener("mouseenter", () => {
+    
+// });
