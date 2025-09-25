@@ -4,21 +4,26 @@ var root = document.documentElement;
 let searchBarCreated = false;
 
 const createSearchBar = () => {
+    // Check if screen width is less than 600px or if search bar already exists
     if (searchBarCreated) return;
 
-    const loopIcone = document.getElementById("loop-icone");
-    if (!loopIcone) return;
+    if (window.innerWidth >= 600) {
+        const loopIcone = document.getElementById("loop-icone");
+        if (!loopIcone) return;
 
-    const searchInput = document.createElement("input");
-    searchInput.type = "text";
-    searchInput.placeholder = "Search...";
-    searchInput.classList.add("search-input");
+        const searchInput = document.createElement("input");
+        searchInput.type = "text";
+        searchInput.placeholder = "Search...";
+        searchInput.classList.add("search-input");
 
-    // Insert before the loop icon
-    loopIcone.parentNode.insertBefore(searchInput, loopIcone);
-    
-    // Show the search bar with animation
-    setTimeout(() => searchInput.classList.add("visible"), 0);
+        // Insert before the loop icon
+        loopIcone.parentNode.insertBefore(searchInput, loopIcone);
+        
+        // Show the search bar with animation
+        setTimeout(() => searchInput.classList.add("visible"), 0);
+    } else {
+        return;
+    }
     
     searchBarCreated = true;
 };
