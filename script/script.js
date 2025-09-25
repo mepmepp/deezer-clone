@@ -141,6 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // USER EVENTS WHEN CLICKING ON LOGO
+// Desc: change logo and logo-like fonts, change chillflix resume text and buttons text
 
 const chillFlixStyles = ['chilly-danger', 'chilly-zen', 'chilly-cold'];
 let chillFlixStyle = chillFlixStyles[0];

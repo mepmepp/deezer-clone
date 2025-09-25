@@ -32,7 +32,14 @@
     --gap-xl: 2rem;
     --gap-l: 1.5rem;
     --gap-m: 1rem;
+    --gap-s: 0.5rem;
     --header-height: 2.5rem;
+
+    --border-radius-xxl: 100px;
+    --border-radius-xl: 50px;
+    --border-radius-l: 20px;
+    --border-radius-m: 10px;
+    --border-radius-s: 5px;
 
     --button-padding-l: 0.5rem 1rem;
     --button-padding-m: 1px 0.8rem;
@@ -188,7 +195,7 @@ a:hover {
 
 .button {
     border: solid var(--color-font) 1px;
-    border-radius: 20px;
+    border-radius: var(--border-radius-l);
 
     padding: var(--button-padding-m);
 
@@ -259,12 +266,18 @@ a:hover {
 .movies {
     display: flex;
     flex-wrap: nowrap;
-    overflow: hidden;
-    position: absolute;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    gap: var(--gap-s);
+    /* gap: 1rem; */
+    /* padding: 1rem 0; */
+    width: 100%;
+    position: relative;
 }
 
 .movie-poster {
     height: 20rem;
+    flex: 0 0 auto;
     transition: 
         filter 200ms ease-in-out,
         transform 200ms ease-in-out;
@@ -280,8 +293,9 @@ a:hover {
 .scroll-button {
     height: 7vw;
     width: 7vw;
-    border-radius: 100px;
+    border-radius: var(--border-radius-xxl);
     position: absolute;
+    transform: translateY(50%);
     z-index: 7;
 }
 
@@ -292,7 +306,6 @@ a:hover {
 
 .previous {
     left: 10px;
-    transform: translateY(-50%);
 }
 
 .next {
