@@ -14,6 +14,8 @@
 
     --color-red-chocolate: hsl(350, 75%, 19%);
     --color-misty-rose: hsl(2, 65%, 91%);
+    --color-black-transparent: hsla(230, 100%, 7.8%, 0.5);
+    --color-black-more-transparent: hsla(230, 100%, 7.8%, 0.3);
 
     
 
@@ -266,18 +268,15 @@ a:hover {
 .movies {
     display: flex;
     flex-wrap: nowrap;
-    overflow-x: hidden;
     scroll-behavior: smooth;
     gap: var(--gap-s);
-    /* gap: 1rem; */
-    /* padding: 1rem 0; */
     width: 100%;
     position: relative;
 }
 
 .movie-poster {
     height: 20rem;
-    flex: 0 0 auto;
+    border-radius: var(--border-radius-s);
     transition: 
         filter 200ms ease-in-out,
         transform 200ms ease-in-out;
@@ -295,20 +294,22 @@ a:hover {
     width: 7vw;
     border-radius: var(--border-radius-xxl);
     position: absolute;
-    transform: translateY(50%);
+    top: 50%;
+    transform: translateY(-50%);
     z-index: 7;
+    background-color: var(--color-black-transparent);
+    border: none;
 }
 
 .scroll-button:hover {
     cursor: pointer;
-
+    background-color: var(--color-black-more-transparent);
 }
 
-.previous {
-    left: 10px;
+.scroll-button.previous {
+    left: 1rem;
 }
 
-.next {
-    right: 10px;
+.scroll-button.next {
+    right: 1rem;
 }
-
