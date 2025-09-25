@@ -352,8 +352,8 @@ a:hover {
 }
 
 .movie-poster-container:hover .movie-poster {
-    filter: blur(2px);
-    transform: scale(1.05);
+    filter: blur(1px);
+    transform: scale(1.1);
 }
 
 .movie-poster-container:hover .info-box {
