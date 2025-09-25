@@ -77,8 +77,6 @@ const options = {
   }
 };
 
-// Stockage global des films
-let allMovies = {};
 
 // FETCH HERO BANNER IMAGE
 
@@ -103,6 +101,18 @@ let allMovies = {};
 // }
 
 // FETCH DES FILMS
+
+var Movie = /** @class */ (function () {
+    function Movie(id, title, description) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+    }
+    return Movie;
+}());
+
+let allMovies = [];
+
 async function fetchMovies(endpoint, containerSelector) {
     try {
         const response = await fetch(`${BASE_URL}${endpoint}&language=fr-FR`, options);
@@ -116,9 +126,9 @@ async function fetchMovies(endpoint, containerSelector) {
 // ======= RENDER MOVIES =======
 function addMoviesToRow(movies, containerSelector) {
   const container = document.querySelector(containerSelector);
-  const prevButton = container.querySelector('.scroll-button.previous');
-  const nextButton = container.querySelector('.scroll-button.next');
-  container.innerHTML = ""; // clear placeholder images
+//   const prevButton = container.querySelector('.scroll-button.previous');
+//   const nextButton = container.querySelector('.scroll-button.next');
+  container.innerHTML = "";
   
   if (prevButton) container.appendChild(prevButton);
   if (nextButton) container.appendChild(nextButton);
@@ -129,12 +139,15 @@ function addMoviesToRow(movies, containerSelector) {
     img.setAttribute("aria-label", `Poster of ${movie.title}`);
     img.classList.add("movie-poster");
     container.appendChild(img);
+
+    createInfoBox();
+
   });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   // Favorites section
-  fetchMovies("/movie/top_rated?sort_by=vote_average.desc", ".my-favorites .movies"); // line added
+  fetchMovies("/movie/top_rated?sort_by=vote_average.desc", ".my-favorites .movies"); 
 
   // Hero banner
 //   fetchHeroMovie("/movie/top_rated?sort_by=vote_average.desc"); // line added
@@ -205,3 +218,25 @@ function logoListener() {
     logo.addEventListener("click", chillFlix);
   } 
 } 
+
+
+// CREATE INFO BOX WHEN LOADING MOVIES
+
+const createInfoBox = () => {
+    const infoBox = document.createElement("div");
+    infoBox.class = "info-box";
+    infoBox.id = parseMovieTitle();
+    infoBox.textContent = "Movie Title"; // Placeholder text
+    // infoBox.style.display = "none"; 
+    infoBox.style.position = "absolute";
+    infoBox.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+    infoBox.style.color = "white";
+    infoBox.style.padding = "10px";
+    infoBox.style.borderRadius = "5px";
+    infoBox.style.zIndex = "1000";
+    document.body.appendChild(infoBox);
+}
+
+const parseMovieTitle = () => {
+
+}

@@ -247,15 +247,6 @@ a:hover {
   mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
 }
 
-
-
-/* ===================== */
-/* GENERAL FILM SECTIONS */
-/* ===================== */
-
-
-
-
 /* ============= */
 /* FILM SECTIONS */
 /* ============= */
@@ -290,7 +281,7 @@ a:hover {
     z-index: 6;
 }
 
-.scroll-button {
+/* .scroll-button {
     height: 7vw;
     width: 7vw;
     border-radius: var(--border-radius-xxl);
@@ -313,4 +304,4 @@ a:hover {
 
 .scroll-button.next {
     right: 1rem;
-}
+} */
