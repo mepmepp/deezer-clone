@@ -141,26 +141,40 @@ const options = {
 
 
 // FETCH HERO BANNER IMAGE
+async function fetchHeroSeries() {
+    try {
+        const response = await fetch(`${BASE_URL}/tv/popular?language=fr-FR`, options);
+        const data = await response.json();
+        const bestSerie = data.results[0]; // Get the most popular serie
 
-// async function fetchHeroMovie(endpoint) {
-//   try {
-//     const response = await fetch(`${BASE_URL}${endpoint}&language=fr-FR`, options);
-//     const data = await response.json();
-//     const bestMovie = data.results[0]; // take the first one
+        const heroBanner = document.querySelector(".hero-banner");
+        if (!heroBanner) return;
 
-//     const heroBanner = document.querySelector(".hero-banner");
-//     heroBanner.style.backgroundImage = `url(${IMAGE_BASE_URL}${bestMovie.backdrop_path})`;
-//     heroBanner.setAttribute("aria-label", `Poster of ${bestMovie.title}`);
+        // Set the background image
+        heroBanner.style.backgroundImage = `url(${IMAGE_BASE_URL}${bestSerie.backdrop_path})`;
+        heroBanner.setAttribute("aria-label", `Poster of ${bestSerie.name}`);
 
-//     const heroContent = heroBanner.querySelector(".hero-content h1");
-//     heroContent.textContent = bestMovie.title;
+        // Update the content
+        const serieResume = document.getElementById("serie-resume");
+        if (serieResume) {
+            serieResume.textContent = bestSerie.overview;
+        }
 
-//     const heroParagraph = heroBanner.querySelector(".hero-content p");
-//     heroParagraph.textContent = bestMovie.overview;
-//   } catch (error) {
-//     console.error("Erreur API (hero):", error);
-//   }
-// }
+        // Update button text
+        const watchButton = document.getElementById("hero-watch-button");
+        const infoButton = document.getElementById("hero-info-button");
+
+        if (watchButton) {
+            watchButton.textContent = `▶ Watch ${bestSerie.name}`;
+        }
+        if (infoButton) {
+            infoButton.textContent = "ℹ More Info";
+        }
+
+    } catch (error) {
+        console.error("Error fetching hero serie:", error);
+    }
+}
 
 // FETCH DES FILMS
 
@@ -279,16 +293,20 @@ const GENRE_IDS = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Fetch genres and update category titles
-    fetchAndUpdateGenres();
-    
-    // Fetch movies for each genre
-    Object.entries(GENRE_IDS).forEach(([genre, id]) => {
-        fetchMovies(`/discover/movie?with_genres=${id}`, `.${genre} .movies`);
-    });
+    const isSeriesPage = window.location.pathname.includes('series.html');
 
-    // Hero banner
-    //   fetchHeroMovie("/movie/top_rated?sort_by=vote_average.desc"); // line added
+    if (isSeriesPage) {
+        // We're on the series page, fetch the hero series
+        fetchHeroSeries();
+    } else {
+        // We're on the main page
+        fetchAndUpdateGenres();
+        
+        // Fetch movies for each genre
+        Object.entries(GENRE_IDS).forEach(([genre, id]) => {
+            fetchMovies(`/discover/movie?with_genres=${id}`, `.${genre} .movies`);
+        });
+    }
 });
 
 // USER EVENTS WHEN CLICKING ON LOGO
