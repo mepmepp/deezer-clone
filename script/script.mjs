@@ -4,7 +4,7 @@ import { handleSearch } from './search.mjs';
 // GLOBAL VARIABLES //
 //////////////////////
 
-var root = document.documentElement;
+export var root = document.documentElement;
 var searchBarCreated = false;
 
 ///////////////////////////
