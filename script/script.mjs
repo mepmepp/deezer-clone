@@ -6,26 +6,6 @@ import { handleSearch } from './search.mjs';
 
 var root = document.documentElement;
 
-///////////////
-// FUNCTIONS //
-///////////////
-
-function removeLettersFromInt(inputString) {
-    let characters = inputString.split("");
-    let result = "";
-    
-    for (let i = 0; i < characters.length; i++) {
-        let currentCharacter = characters[i];
-        
-        if (currentCharacter >= '0' && currentCharacter <= '9') {
-            result = result + currentCharacter;
-        }
-    }
-    
-    result = parseInt(result);
-    return result;
-}
-
 ///////////////////////////
 // SEARCH BAR MANAGEMENT //
 ///////////////////////////
@@ -118,8 +98,8 @@ const changeSearchBarDisplay = () => {
     const opacityTransitionAppear = "opacity var(--transition-time-slow) ease-in-out";
     const transitionFast = getComputedStyle(root).getPropertyValue("--transition-time-fast");
     const transitionMedium = getComputedStyle(root).getPropertyValue("--transition-time-medium");
-    const transitionFastMs = removeLettersFromInt(transitionFast);
-    const transitionMediumMs = removeLettersFromInt(transitionMedium);
+    const transitionFastMs = transitionFast.replace('ms', '');
+    const transitionMediumMs = transitionMedium.replace('ms', '');
 
     // Promise to improve readability of code below
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
