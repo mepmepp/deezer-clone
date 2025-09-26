@@ -79,10 +79,17 @@
 
 body {
     margin: 0;
+    margin-left: 10px;
     padding: 0;
     background-color: var(--color-background);
     font-family: "Roboto", sans-serif;
     font-size: large;
+}
+
+@media screen and (max-width: 600px) {
+    body {
+        margin-right: 10px;
+    }
 }
 
 a {
@@ -169,9 +176,10 @@ a:hover {
 #header {
     background-color: var(--color-highlighted-background);
     position: fixed;
-    width: 100%;
+    width: calc(100% - 20px);
     top: 0;
     left: 0;
+    padding: 0px 10px;
     z-index: 3;
     mask-image: linear-gradient(to bottom, black 25%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, black 25%, transparent 100%);
