@@ -40,9 +40,6 @@ const verifyDeviceAndCreateSearchBar = () => {
     if (!loopIcone) return;
     console.log("Loop icon found");
 
-    // const transitionTimeMedium = parseFloat(getComputedStyle(root).getPropertyValue("--transition-time-medium"));
-
-
     if (window.innerWidth >= 600) {
         const device = 'biggerScreen';
         if (searchBarCreated) return device;
@@ -52,7 +49,6 @@ const verifyDeviceAndCreateSearchBar = () => {
         const device = 'smallerScreen';
         if (searchBarCreated) return device;
         createSearchBarMobile();
-        // setTimeout(() => searchInput.classList.add("visible"), 0);
         return device;
     }
 

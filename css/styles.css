@@ -117,6 +117,14 @@ a:hover {
     font-style: normal;
 }
 
+/* ============== */
+/* DISPLAY = NONE */
+/* ============== */
+
+.none {
+    display: none;
+}
+
 /* ====== */
 /* ICONES */
 /* ====== */
@@ -361,27 +369,15 @@ a:hover {
     z-index: 2;
 }
 
-/* .scroll-button {
-    height: 7vw;
-    width: 7vw;
-    border-radius: var(--border-radius-xxl);
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 7;
-    background-color: var(--color-black-transparent);
-    border: none;
+.movie {
+    transition: opacity var(--transition-time-medium) ease-in-out;
 }
 
-.scroll-button:hover {
-    cursor: pointer;
-    background-color: var(--color-black-more-transparent);
+.movie[style*="display: none"] {
+    opacity: 0;
+    transition: opacity var(--transition-time-fast) ease-in-out;
 }
 
-.scroll-button.previous {
-    left: 1rem;
+section h2 {
+    transition: opacity var(--transition-time-fast) ease-in-out;
 }
-
-.scroll-button.next {
-    right: 1rem;
-} */
