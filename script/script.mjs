@@ -5,12 +5,11 @@ import { handleSearch } from './search.mjs';
 //////////////////////
 
 var root = document.documentElement;
+var searchBarCreated = false;
 
 ///////////////////////////
 // SEARCH BAR MANAGEMENT //
 ///////////////////////////
-
-let searchBarCreated = false;
 
 // DESC: verify device width and create search bar accordingly
 // RETURNS: 'biggerScreen' or 'smallerScreen'
@@ -66,11 +65,12 @@ const createSearchBarDesktop = () => {
 // RETURNS: void
 const createSearchBarMobile = () => {
     if (searchBarCreated) return;
-
     console.log("Creating search bar for mobile");
+
     const loopIcone = document.getElementById("loop-icone");
     if (!loopIcone) return; 
 
+    // Create the search input element and insert it before the loop icon
     const searchInput = document.createElement("input");
     searchInput.id = "search-input";
     searchInput.type = "text";
@@ -122,6 +122,7 @@ const changeSearchBarDisplay = () => {
 
     // Change mylist opacity state based on search bar visibility
     const mylist = document.getElementById("my-list");
+
     if (mylist && !searchBarVisible) {
         mylist.style.opacity = "0";
         mylist.style.transition = opacityTransition;
@@ -150,6 +151,8 @@ const changeSearchBarDisplay = () => {
 // COLOR THEME MANAGEMENT //
 ////////////////////////////
 
+// DESC: manage color theme change when clicking on color icon
+// RETURNS: void
 const colorThemeManagement = () => {
     const colorIcone = document.getElementById("color-theme-icone");
     const loopIcone = document.getElementById("loop-icone");
@@ -194,22 +197,26 @@ const colorThemeManagement = () => {
     });
 }
 
-// FETCH HEADER ON EACH PAGE
+// DESC: EVENTLISTENER -> FETCH HEADER ON EACH PAGE
 document.addEventListener("DOMContentLoaded", function() {
     fetch("/html/header.html")
+        // Watch possible error when fetching header
         .then(response => {
             if (!response.ok) {
                 throw new Error("Failed to load header");
             }
             return response.text();
         })
+        // Provide header to header-container 
         .then(data => {
             document.getElementById("header-container").innerHTML = data;
             logoListener();
         })
+        // Add the listener for color theme management
         .then(() => {
             colorThemeManagement();
         })
+        // Add the search bar and its functionalities
         .then(() => {
             const device = verifyDeviceAndCreateSearchBar();
             switch (device) {
@@ -224,6 +231,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     break;
             }
         })
+        // Catch possible error when loading header
         .catch(error => {
             console.error("Error loading the header:", error);
         });
@@ -244,9 +252,10 @@ const options = {
 // FETCH HERO BANNER IMAGE
 async function fetchHeroSeries() {
     try {
+        // Get the most popular serie
         const response = await fetch(`${BASE_URL}/tv/popular?language=fr-FR`, options);
         const data = await response.json();
-        const bestSerie = data.results[0]; // Get the most popular serie
+        const bestSerie = data.results[0]; 
 
         const heroBanner = document.querySelector(".hero-banner");
         if (!heroBanner) return;
@@ -277,7 +286,7 @@ async function fetchHeroSeries() {
     }
 }
 
-// FETCH DES FILMS
+// FETCH FILMS
 
 var Movie = /** @class */ (function () {
     function Movie(id, title, overview) {
@@ -288,7 +297,7 @@ var Movie = /** @class */ (function () {
     return Movie;
 }());
 
-let allMovies = [];
+let allMovies = []; // ne sert à rien pour l'instant mais pourrait servir pour améliorer la recherche
 
 async function fetchMovies(endpoint, containerSelector) {
     try {
