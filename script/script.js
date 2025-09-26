@@ -1,61 +1,130 @@
+//////////////////////
+// GLOBAL VARIABLES //
+//////////////////////
+
 var root = document.documentElement;
 
-// SEARCH BAR MANAGEMENT
+///////////////////////////
+// SEARCH BAR MANAGEMENT //
+///////////////////////////
+
 let searchBarCreated = false;
 
-const createSearchBar = () => {
-    // Check if screen width is less than 600px or if search bar already exists
-    if (searchBarCreated) return;
+// DESC: verify device width and create search bar accordingly
+// RETURNS: 'biggerScreen' or 'smallerScreen'
+const verifyDeviceAndCreateSearchBar = () => {
+    console.log("Verifying device for search bar creation");
+    const loopIcone = document.getElementById("loop-icone");
+    if (!loopIcone) return;
+    console.log("Loop icon found");
+
+    // const transitionTimeMedium = parseFloat(getComputedStyle(root).getPropertyValue("--transition-time-medium"));
+
 
     if (window.innerWidth >= 600) {
-        const loopIcone = document.getElementById("loop-icone");
-        if (!loopIcone) return;
-
-        const searchInput = document.createElement("input");
-        searchInput.type = "text";
-        searchInput.placeholder = "Search...";
-        searchInput.classList.add("search-input");
-
-        // Insert before the loop icon
-        loopIcone.parentNode.insertBefore(searchInput, loopIcone);
-        
-        // Show the search bar with animation
-        setTimeout(() => searchInput.classList.add("visible"), 0);
+        const device = 'biggerScreen';
+        if (searchBarCreated) return device;
+        createSearchBarDesktop();
+        return device;
     } else {
-
-        const loopIcone = document.getElementById("loop-icone");
-        const home = document.getElementById("home");
-        const mylist = document.getElementById("my-list");
-        if (!loopIcone) return; 
-
-        if (home) {
-            home.style.transition = "opacity var(--transition-time-fast) ease-in-out";
-            home.style.opacity = "0";
-            let transitionTime = document.documentElement.getPropertyValue("--transition-time-fast");
-            setTimeout(() => {
-                home.style.display = "none";
-            }, transitionTime);
-
-        }
-        if (mylist) {
-            mylist.style.transition = "opacity var(--transition-time-fast) ease-in-out";
-            mylist.style.opacity = "0";
-            setTimeout(() => {
-                mylist.style.display = "none";
-            }, transitionTime);
-        }; 
-
-
-        const searchInput = document.createElement("input");
-        searchInput.type = "text";
-        searchInput.placeholder = "Search...";
-        searchInput.classList.add("search-input-mobile");  
+        const device = 'smallerScreen';
+        if (searchBarCreated) return device;
+        createSearchBarMobile();
+        // setTimeout(() => searchInput.classList.add("visible"), 0);
+        return device;
     }
-    
+
+}
+
+// DESC : create search bar in header for desktop
+// RETURNS: void
+const createSearchBarDesktop = () => {
+    console.log("Creating search bar for desktop");
+
+    const loopIcone = document.getElementById("loop-icone");
+    if (!loopIcone) return;
+
+    // Create the search input element
+    const searchInput = document.createElement("input");
+    searchInput.id = "search-input";
+    searchInput.type = "text";
+    searchInput.placeholder = "Search...";
+    searchInput.classList.add("search-input");
+
+    // Insert before the loop icon
+    loopIcone.parentNode.insertBefore(searchInput, loopIcone);
+
+    // Make it visible
+    setTimeout(() => searchInput.classList.add("visible"), 0);
+
     searchBarCreated = true;
 };
 
-// COLOR THEME
+// DESC: create search bar in header for mobile
+// Hides home and my list icons
+// RETURNS: void
+const createSearchBarMobile = () => {
+    if (searchBarCreated) return;
+
+    console.log("Creating search bar for mobile");
+    const loopIcone = document.getElementById("loop-icone");
+    if (!loopIcone) return; 
+
+    const searchInput = document.createElement("input");
+    searchInput.id = "search-input";
+    searchInput.type = "text";
+    searchInput.placeholder = "Search...";
+    searchInput.classList.add("search-input"); 
+
+    loopIcone.parentNode.insertBefore(searchInput, loopIcone);
+    
+    searchBarCreated = true;
+}
+
+// DESC: toggle search bar visibility when clicking on loop icon
+// Only available on mobile (for simplicity, search bar should be more accessible on desktop)
+// RETURNS: void
+let searchBarVisible = false;
+const changeSearchBarDisplay = () => {
+    const searchInput = document.getElementById("search-input");
+    if (!searchInput) return;
+
+    // Unique transition style for all transitions in function
+    const opacityTransition = "opacity var(--transition-time-fast) ease-in-out";
+
+    // Change home opacity state based on search bar visibility
+    const home = document.getElementById("home");
+    if (home && !searchBarVisible) {
+        home.style.opacity = "0";
+        home.style.transition = opacityTransition;
+    } else if (home && searchBarVisible) {
+        home.style.opacity = "1";
+        home.style.transition = opacityTransition;
+    }
+
+    // Change mylist opacity state based on search bar visibility
+    const mylist = document.getElementById("my-list");
+    if (mylist && !searchBarVisible) {
+        mylist.style.opacity = "0";
+        mylist.style.transition = opacityTransition;
+    } else if (mylist && searchBarVisible) {
+        mylist.style.opacity = "1";
+        mylist.style.transition = opacityTransition;
+    }
+    
+    // Search bar appear or disappear depending on its previous state
+    if (searchBarVisible) {
+        searchInput.classList.remove("visible");
+        searchBarVisible = false;
+    } else {
+        searchInput.classList.add("visible");
+        searchBarVisible = true;
+    }
+}
+
+////////////////////////////
+// COLOR THEME MANAGEMENT //
+////////////////////////////
 
 const colorThemeManagement = () => {
     const colorIcone = document.getElementById("color-theme-icone");
@@ -63,12 +132,6 @@ const colorThemeManagement = () => {
     const arrowDown = document.getElementById("arrow-down-icone");
     var root = document.documentElement;
 
-    // Add mouseenter event for search bar
-    if (window.innerWidth >= 600) {
-        loopIcone?.addEventListener("mouseenter", createSearchBar);
-    } else {
-        loopIcone?.removeEventListener("click", createSearchBar);
-    }
     root.setAttribute("data-theme", "dark");
 
     var isHovering = false;
@@ -122,6 +185,20 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(() => {
             colorThemeManagement();
+        })
+        .then(() => {
+            const device = verifyDeviceAndCreateSearchBar();
+            switch (device) {
+                case 'biggerScreen': 
+                    // Search bar already managed above for bigger screens
+                    break;
+                case 'smallerScreen':
+                    // Event listener to toggle mobile search bar visibility
+                    const loopIcone = document.getElementById("loop-icone");
+                    if (!loopIcone) return;
+                    loopIcone.addEventListener("click", () => changeSearchBarDisplay());
+                    break;
+            }
         })
         .catch(error => {
             console.error("Error loading the header:", error);
