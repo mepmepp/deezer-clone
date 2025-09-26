@@ -1,0 +1,17 @@
+.movie {
+    transition: opacity var(--transition-time-medium) ease-in-out;
+}
+
+/* When movie is hidden by search */
+.movie[style*="display: none"] {
+    opacity: 0;
+    transition: opacity var(--transition-time-fast) ease-in-out;
+}
+
+.search-input {
+    transition: opacity var(--transition-time-medium) ease-in-out;
+}
+
+.search-input.visible {
+    opacity: 1;
+}

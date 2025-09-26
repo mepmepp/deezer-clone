@@ -1,4 +1,4 @@
-import { handleSearch } from './search.js';
+import { handleSearch } from './search.mjs';
 
 //////////////////////
 // GLOBAL VARIABLES //
