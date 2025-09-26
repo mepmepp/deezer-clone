@@ -430,11 +430,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// USER EVENTS WHEN CLICKING ON LOGO
-// DESC: change logo and logo-like fonts, change chillflix resume text and buttons text
+///////////////////////////////////////
+// USER EVENTS WHEN CLICKING ON LOGO //
+///////////////////////////////////////
+
 const chillFlixStyles = ['chilly-danger', 'chilly-zen', 'chilly-cold'];
 let chillFlixStyle = chillFlixStyles[0];
 
+// DESC: Check current chillflix style and return its index in chillFlixStyles array
+// RETURNS: index of current style in chillFlixStyles or -1 if not found
 const checkChillFlixStyle = () => {
     for (let i = 0; i < chillFlixStyles.length; i++) {
         if (chillFlixStyle === chillFlixStyles[i]) {
@@ -444,6 +448,9 @@ const checkChillFlixStyle = () => {
     return -1;
 }
 
+// DESC: Change logo style and some text on the page when clicking on the logo
+// Cycles through chillFlixStyles array
+// RETURNS: void
 const chillFlix = () => {
     const logo = document.getElementById("logo");
     const logoLike = document.querySelectorAll(".logo-like");
@@ -451,6 +458,7 @@ const chillFlix = () => {
     const heroWatchButton = document.getElementById("hero-watch-button");
     const heroInfoButton = document.getElementById("hero-info-button");
 
+    // If logo exists, change its style
     if (logo) {
         let i = checkChillFlixStyle();
 
@@ -460,6 +468,7 @@ const chillFlix = () => {
             chillFlixStyle = chillFlixStyles[(i + 1) % chillFlixStyles.length];
         }
 
+        // Apply style changes based on current chillFlixStyle
         switch (chillFlixStyle) {
             case 'chilly-zen':
                 logo.style.fontFamily = '"Fredericka the Great", serif';
@@ -481,6 +490,7 @@ const chillFlix = () => {
                 break;
         }
 
+        // Apply the same font family to all elements with class "logo-like"
         logoLike.forEach(logoL => logoL.style.fontFamily = logo.style.fontFamily);
 
     } else {
@@ -488,38 +498,12 @@ const chillFlix = () => {
     }
 }
 
+// DESC: Add event listener to logo when header is loaded
+// Used after the header is fetched
+// RETURNS: void
 function logoListener() {
   const logo = document.querySelector(".logo");
   if (logo) {
     logo.addEventListener("click", chillFlix);
   } 
 } 
-
-
-// CREATE INFO BOX WHEN LOADING MOVIES
-
-// const createInfoBox = () => {
-//     const infoBox = document.createElement("div");
-//     infoBox.class = "info-box";
-//     infoBox.id = parseMovieTitle();
-//     infoBox.textContent = "Movie Title"; // Placeholder text
-//     // infoBox.style.display = "none"; 
-//     infoBox.style.position = "absolute";
-//     infoBox.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
-//     infoBox.style.color = "white";
-//     infoBox.style.padding = "10px";
-//     infoBox.style.borderRadius = "5px";
-//     infoBox.style.zIndex = "1000";
-//     document.body.appendChild(infoBox);
-// }
-
-// const parseMovieTitle = () => {
-
-// }
-
-// SEARCH BAR 
-
-// const loopIcone = document.getElementById("loop-icone");
-// loopIcone.addEventListener("mouseenter", () => {
-    
-// });
