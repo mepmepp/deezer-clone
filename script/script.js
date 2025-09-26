@@ -4,6 +4,26 @@
 
 var root = document.documentElement;
 
+///////////////
+// FUNCTIONS //
+///////////////
+
+function removeLettersFromInt(inputString) {
+    let characters = inputString.split("");
+    let result = "";
+    
+    for (let i = 0; i < characters.length; i++) {
+        let currentCharacter = characters[i];
+        
+        if (currentCharacter >= '0' && currentCharacter <= '9') {
+            result = result + currentCharacter;
+        }
+    }
+    
+    result = parseInt(result);
+    return result;
+}
+
 ///////////////////////////
 // SEARCH BAR MANAGEMENT //
 ///////////////////////////
@@ -91,15 +111,29 @@ const changeSearchBarDisplay = () => {
 
     // Unique transition style for all transitions in function
     const opacityTransition = "opacity var(--transition-time-fast) ease-in-out";
+    const opacityTransitionAppear = "opacity var(--transition-time-slow) ease-in-out";
+    const transitionFast = getComputedStyle(root).getPropertyValue("--transition-time-fast");
+    const transitionMedium = getComputedStyle(root).getPropertyValue("--transition-time-medium");
+    const transitionFastMs = removeLettersFromInt(transitionFast);
+    const transitionMediumMs = removeLettersFromInt(transitionMedium);
+
+    // Promise to improve readability of code below
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
     // Change home opacity state based on search bar visibility
     const home = document.getElementById("home");
     if (home && !searchBarVisible) {
         home.style.opacity = "0";
         home.style.transition = opacityTransition;
+        setTimeout(() => { home.style.display = "none"; }, transitionFastMs);
     } else if (home && searchBarVisible) {
-        home.style.opacity = "1";
-        home.style.transition = opacityTransition;
+        delay(transitionMediumMs).then(() => {
+            home.style.display = "inline";
+        })
+        delay(transitionMediumMs + (transitionFastMs / 3)).then(() => {
+            home.style.opacity = "1";
+            home.style.transition = opacityTransitionAppear;
+        });
     }
 
     // Change mylist opacity state based on search bar visibility
@@ -107,9 +141,15 @@ const changeSearchBarDisplay = () => {
     if (mylist && !searchBarVisible) {
         mylist.style.opacity = "0";
         mylist.style.transition = opacityTransition;
+        setTimeout(() => { mylist.style.display = "none"; }, transitionFastMs);
     } else if (mylist && searchBarVisible) {
-        mylist.style.opacity = "1";
-        mylist.style.transition = opacityTransition;
+        delay(transitionMediumMs).then(() => {
+            mylist.style.display = "inline";
+        })
+        delay(transitionMediumMs + transitionFastMs).then(() => {
+            mylist.style.opacity = "1";
+            mylist.style.transition = opacityTransitionAppear;
+        });
     }
     
     // Search bar appear or disappear depending on its previous state
