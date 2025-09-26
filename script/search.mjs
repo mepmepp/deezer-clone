@@ -1,13 +1,19 @@
-// Search functionality
+import { root } from './script.mjs';
+
+//////////////////////////
+// Search functionality //
+//////////////////////////
 
 
+// DESC: Handle search input to filter movie elements and adjust UI accordingly
+// RETURNS: void
 export const handleSearch = (event) => {
     const searchText = event.target.value.toLowerCase();
     const movieElements = document.querySelectorAll('.movie');
     const categoryTitles = document.querySelectorAll('section h2');
     const heroBanner = document.querySelector('.hero-banner');
 
-    const transitionFast = getComputedStyle(document.documentElement).getPropertyValue('--transition-time-fast');
+    const transitionFast = getComputedStyle(root).getPropertyValue('--transition-time-fast');
 
     // Hide or show hero banner based on whether there's search text
     if (searchText) {
