@@ -299,6 +299,10 @@ var Movie = /** @class */ (function () {
 
 let allMovies = []; // ne sert à rien pour l'instant mais pourrait servir pour améliorer la recherche
 
+// DESC: fetch movies from TMDB API and add them to the specified container
+// PARAMS: endpoint (string) - API endpoint to fetch movies from
+//         containerSelector (string) - CSS selector of the container to add movies to
+// RETURNS: void
 async function fetchMovies(endpoint, containerSelector) {
     try {
         const response = await fetch(`${BASE_URL}${endpoint}&language=fr-FR`, options);
@@ -322,15 +326,15 @@ async function fetchMovies(endpoint, containerSelector) {
     }
 }
 
-// ======= RENDER MOVIES =======
+// DESC: add movie posters to a specified container
+// PARAMS: movies (array) - array of movie objects
+//         containerSelector (string) - CSS selector of the container to add movies to
+// RETURNS: void
 function addMoviesToRow(movies, containerSelector) {
   const container = document.querySelector(containerSelector);
-//   const prevButton = container.querySelector('.scroll-button.previous');
-//   const nextButton = container.querySelector('.scroll-button.next');
   container.innerHTML = "";
-  
-//   if (prevButton) container.appendChild(prevButton);
-//   if (nextButton) container.appendChild(nextButton);
+
+
   movies.forEach(movie => {
     // Create container for poster and info box
     const posterContainer = document.createElement("div");
@@ -368,7 +372,8 @@ function addMoviesToRow(movies, containerSelector) {
   });
 }
 
-// Fetch and update genre categories
+// DESC: Fetch and update genre categories
+// RETURNS: void
 async function fetchAndUpdateGenres() {
     try {
         const response = await fetch(`${BASE_URL}/genre/movie/list?language=en`, options);
@@ -406,6 +411,8 @@ const GENRE_IDS = {
     horror: 27
 };
 
+// DESC: EVENT LISTENER -> FETCH MOVIES ON EACH PAGE
+// Different behavior if we're on the main page or the series page
 document.addEventListener("DOMContentLoaded", () => {
     const isSeriesPage = window.location.pathname.includes('series.html');
 
@@ -424,8 +431,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // USER EVENTS WHEN CLICKING ON LOGO
-// Desc: change logo and logo-like fonts, change chillflix resume text and buttons text
-
+// DESC: change logo and logo-like fonts, change chillflix resume text and buttons text
 const chillFlixStyles = ['chilly-danger', 'chilly-zen', 'chilly-cold'];
 let chillFlixStyle = chillFlixStyles[0];
 
