@@ -1,20 +1,70 @@
---
+---
 
-# Netflix -> Streamflix
+# 🎮 ChillFlix
 
-- Bonne sémantique HTML
-- Normes accessibilité 
-- Clarté du code
-- Consistance du design 
-- Bonne expérience utilisateur 
-- Responsive
 
---
 
-Resources
-<a href="https://www.flaticon.com/fr/icones-gratuites/jeu-de-google" title="jeu de google icônes">Jeu de google icônes créées par Sympnoiaicon - Flaticon</a>
 
-<a href="https://www.flaticon.com/fr/icones-gratuites/plus" title="plus icônes">Plus icônes créées par verry purnomo - Flaticon</a>
-<a href="https://www.flaticon.com/fr/icones-gratuites/loupe" title="loupe icônes">Loupe icônes créées par Muhammad_Usman - Flaticon</a>
-<a href="https://www.flaticon.com/fr/icones-gratuites/ange-down" title="ange down icônes">Ange down icônes créées par wirantoni - Flaticon</a>
-<a href="https://www.flaticon.com/fr/icones-gratuites/ange-down" title="ange down icônes">Ange down icônes créées par wirantoni - Flaticon</a>
+---
+
+## 🚀 Lancer la demo
+
+Se lance avec l'extension Live Server
+
+---
+
+## 📂 Structure du projet
+
+```
+/project-root
+│
+├─ index.html         # Page principale
+├─ game.js            # Logique du jeu, joueur, collisions, etc.
+├─ platformer.js      # Classes PlatformerGrid, PlatformerNode, etc.
+├─ editor.js          # LevelEditor : créer et modifier les niveaux
+├─ levelloader.js     # LevelLoader : charger/naviguer entre les niveaux
+├─ save.js            # Menu sauvegarde/export/import
+├─ json/              # Fichiers JSON des niveaux
+│    ├─ level1.json
+│    ├─ level2.json
+│    └─ ...
+├─ sprites/images/    # Images & backgrounds
+│    └─ cave.jpg
+├─ *.ts               # Version TypeScript des modules
+└─ README.md
+```
+
+
+---
+
+## 🎮 Fonctionnalités
+
+
+
+
+---
+
+## 🛠️ Implémentation des contraintes (PDF)
+
+| Catégorie            | Exigence                          | Où utilisé ?                                                          |
+| -------------------- | --------------------------------- | --------------------------------------------------------------------- |
+
+
+
+---
+
+## 🔜 Possible improvment 
+
+- Integrate icones that changes with the right color
+- Integrate a third color theme
+- Code gets a little repetitive sometimes, I could clean this more
+- Fix some bugs (home and list that never reappears when the search bar disappears)
+
+---
+
+## ✅ Licence
+
+Projet personnel / Open source (MIT recommandé)
+
+---
+
