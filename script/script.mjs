@@ -471,7 +471,7 @@ const chillFlix = () => {
                 logo.style.fontFamily = '"Rubik Glitch", system-ui';
                 chillFlixResume.textContent = "Unlimited streaming of films and shows. Step inside — what lurks in the shadows may chill, thrill, or delight your mind. You won’t know until it’s too late.";
                 heroWatchButton.textContent = "▶ Watch now if you dare!";
-                heroInfoButton.textContent = "ℹ Truth is dangerous";
+                heroInfoButton.textContent = "ℹ More info";
                 break;
             case 'chilly-cold':
                 logo.style.fontFamily = '"Frijole", system-ui';
